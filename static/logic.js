@@ -8,7 +8,7 @@ function datasetBuilder() {
 			let curr = json.data.children[i].data;
 			luserdata.push(dateParser(curr.created_utc * 1000));
 		}
-		let currColor = urandomColor(colorset);
+		let currColor = hslColor(j, datastore.length)
 		dataset.push({
 			label:datastore[j].data.children[0].data.author,
 			data:luserdata,
@@ -22,8 +22,19 @@ function datasetBuilder() {
 	chartStuff(dataset)
 	console.log(dataset)
 }
+// HSV colors
+function hslColor(colorNum, colors){
+    if (colors < 1) colors = 1; // defaults to one color - avoid divide by zero
+    // Pick a hue based on the index of the current object 
+    let hue = colorNum * (360 / colors) % 360
+    // Pick a saturation in 20% increments
+    let sat = (Math.floor(Math.random() * 4) + 1) * 20
+    return `hsl(${hue},${sat}%,50%)`
+}
 
-function getColor() {
+
+// hex/rgb random color - preserved for historical reasons; use HSL instead
+function rgbColor() {
 	let hex = '0123456789ABCDEF';
 	let color = '#';
 	for (i=0;i<6;i++) {
@@ -31,15 +42,7 @@ function getColor() {
 	}
 	return color;
 }
-let colorset = ["#235ebc", "#ba5121", "#820909","#80961e","#1e996a"]
-function urandomColor(colorset) {
-	let i = Math.floor(Math.random() * colorset.length)
-	console.log("i is " + i)
-	let nc = colorset.splice(i, 1);
-	console.log("logging nc " + nc)
-	console.log("logging colorset " + colorset)
-	return nc.toString();
-}
+
 // Parses created_utc value into coordinates for the chart
 function dateParser(input) {
 	var xval, yval;
