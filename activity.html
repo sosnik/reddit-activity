@@ -1,0 +1,27 @@
+<!--
+Copyright 2017-2020 Nik
+MIT license
+Data visualization mechanism for reddit user activity
+Functional, but needs some data handling improvements
+Originally written for /u/Swtorista
+-->
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myChart"></canvas>
+<!-- Local Libraries -->
+<script src="static/moment.js"></script>
+<script src="static/chart.js"></script>
+<script src="static/hammer.js"></script>
+<script src="static/chartjs-plugin-zoom.js"></script>
+
+<!-- Config and data files:
+  bundle.js contains the bundled json to analyze
+  logic.js holds the chart logic -->
+<script src="bundle.js"></script>
+<script src="static/plugin.options.js"></script>
+<script src="static/logic.js"></script>
+
+</body>
+</html>
